@@ -8,5 +8,14 @@
         android:layout_width="match_parent"
         android:id="@+id/recycler_view"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_timer"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add_timer"
+        android:onClick="showTimePicker" />
 
 </RelativeLayout>
