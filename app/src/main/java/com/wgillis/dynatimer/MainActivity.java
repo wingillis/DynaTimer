@@ -61,6 +61,10 @@ public class MainActivity extends Activity {
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
+    public void onRepeatSwitchClicked(View v) {
+        // do nothing yet
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -6,7 +6,10 @@
     <android.support.v7.widget.RecyclerView
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:id="@+id/recycler_view"/>
+        android:id="@+id/recycler_view"
+        android:layout_above="@+id/add_timer"
+        android:layout_below="@+id/repeat_switch"
+        android:layout_margin="0dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -16,6 +19,24 @@
         android:layout_alignParentRight="false"
         android:layout_alignParentBottom="true"
         android:text="@string/add_timer"
-        android:onClick="showTimePicker" />
+        android:onClick="showTimePicker"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:textSize="18sp"
+        android:layout_margin="0dp" />
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Repeat"
+        android:id="@+id/repeat_switch"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:padding="8dp"
+        android:checked="false"
+        android:onClick="onRepeatSwitchClicked" />
 
 </RelativeLayout>

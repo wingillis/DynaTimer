@@ -5,30 +5,40 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
-/**
- * Created by gardnerlab on 7/21/15.
- */
-public class TimePickerFragment extends DialogFragment
-        implements TimePickerDialog.OnTimeSetListener {
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Calendar c = Calendar.getInstance();
-        int hour = c.get(Calendar.HOUR_OF_DAY);
-        int minute = c.get(Calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity(), this, hour,
-                minute, DateFormat.is24HourFormat(getActivity()));
+public class TimePickerFragment extends DialogFragment {
+    private EditText time1;
+    private EditText time2;
+    private EditText time3;
+
+    static TimePickerFragment newInstance() {
+        return new TimePickerFragment();
     }
 
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Toast s = Toast.makeText(view.getContext(), Integer.toString(hourOfDay), Toast.LENGTH_SHORT);
-        s.show();
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater lf, ViewGroup parent, Bundle savedState) {
+        Dialog d = getDialog();
+        d.setTitle("Choose Time");
+        View v = lf.inflate(R.layout.timer_time_picker, parent, false);
+        return v;
     }
 
 }
