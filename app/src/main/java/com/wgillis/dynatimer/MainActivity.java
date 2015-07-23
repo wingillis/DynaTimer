@@ -18,6 +18,7 @@ import android.text.format.DateFormat;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Timer;
 
@@ -26,13 +27,14 @@ public class MainActivity extends Activity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private TimerCard[] timers;
+    private ArrayList<TimerCard> timers;
     private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        timers = new ArrayList<TimerCard>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         recyclerView.setHasFixedSize(true);
@@ -41,12 +43,11 @@ public class MainActivity extends Activity {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        TimerCard t = new TimerCard();
+        TimerCard t = new TimerCard(0,10,0);
         t.readable = " 1 minute";
         t.index = 0;
         t.timerTime = 10;
-        timers = new TimerCard[1];
-        timers[0] = t;
+        timers.add(t);
         
 
         adapter = new RecyclerAdapter(timers);
@@ -66,9 +67,9 @@ public class MainActivity extends Activity {
         // do nothing yet
     }
 
-    public void addTimerData(int hour, int minute, int second) {
-        Toast t = Toast.makeText(this, Integer.toString(hour) + Integer.toString(minute) + Integer.toString(second), Toast.LENGTH_SHORT);
-        t.show();
+    public void addTimerData(TimerCard c) {
+        timers.add(c);
+        adapter.notifyDataSetChanged();
     }
 
 

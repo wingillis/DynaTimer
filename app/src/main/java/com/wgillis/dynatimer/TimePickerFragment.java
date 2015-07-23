@@ -68,7 +68,7 @@ public class TimePickerFragment extends DialogFragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                act.addTimerData(hour, minute, second);
+                act.addTimerData(new TimerCard(hour, minute, second));
                 d.dismiss();
             }
         });

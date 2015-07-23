@@ -6,10 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
-    private TimerCard[] timers;
+    private ArrayList<TimerCard> timers;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textView;
@@ -19,7 +20,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public RecyclerAdapter(TimerCard[] cars) {
+    public RecyclerAdapter(ArrayList<TimerCard> cars) {
+
         timers = cars;
     }
 
@@ -33,12 +35,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder vh, int position) {
-        vh.textView.setText(timers[position].readable);
+        vh.textView.setText(timers.get(position).readable);
     }
 
     @Override
     public int getItemCount() {
-        return timers.length;
+        return timers.size();
     }
 
 }
