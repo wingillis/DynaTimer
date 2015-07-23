@@ -57,12 +57,18 @@ public class MainActivity extends Activity {
     }
 
     public void showTimePicker(View v){
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
+        TimePickerFragment newFragment = TimePickerFragment.newInstance();
+        newFragment.addContext(this);
+        newFragment.show(getFragmentManager(), "");
     }
 
     public void onRepeatSwitchClicked(View v) {
         // do nothing yet
+    }
+
+    public void addTimerData(int hour, int minute, int second) {
+        Toast t = Toast.makeText(this, Integer.toString(hour) + Integer.toString(minute) + Integer.toString(second), Toast.LENGTH_SHORT);
+        t.show();
     }
 
 
