@@ -10,7 +10,10 @@
         android:id="@+id/timerText"
         android:layout_alignParentTop="false"
         android:layout_centerHorizontal="true"
-        android:paddingTop="15dp" />
+        android:paddingTop="15dp"
+        android:layout_below="@+id/title_for_timer"
+        android:hint="Timer hh:mm:ss"
+        android:paddingBottom="15dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,5 +25,16 @@
         android:layout_alignEnd="@+id/timerText"
         android:layout_alignLeft="@+id/timerText"
         android:layout_alignStart="@+id/timerText" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/title_for_timer"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/timerText"
+        android:layout_alignStart="@+id/timerText"
+        android:hint="Title"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp" />
 
 </RelativeLayout>

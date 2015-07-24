@@ -43,11 +43,11 @@ public class MainActivity extends Activity {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        TimerCard t = new TimerCard(0,10,0);
-        t.readable = " 1 minute";
+        TimerCard t = new TimerCard(0,0,1);
+        t.readable = "1 second";
         t.index = 0;
-        t.timerTime = 10;
         timers.add(t);
+
         
 
         adapter = new RecyclerAdapter(timers);

@@ -12,4 +12,8 @@ public class TimerCard {
         timerTime = (hourseconds+seconds + minuteseconds) * 1000;
         readable = Long.toString(timerTime);
     }
+
+    public void setTitle(String title) {
+        readable = title;
+    }
 }

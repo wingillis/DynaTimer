@@ -44,7 +44,7 @@ public class TimePickerFragment extends DialogFragment {
     public View onCreateView(LayoutInflater lf, ViewGroup parent, Bundle savedState) {
         final Dialog d = getDialog();
         d.setTitle("Choose Time");
-        View v = lf.inflate(R.layout.timer_time_picker, parent, false);
+        final View v = lf.inflate(R.layout.timer_time_picker, parent, false);
 
         time1 = (EditText) v.findViewById(R.id.timerText);
         time1.addTextChangedListener(new TextWatcher() {
@@ -68,7 +68,10 @@ public class TimePickerFragment extends DialogFragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                act.addTimerData(new TimerCard(hour, minute, second));
+                TimerCard timer = new TimerCard(hour, minute, second);
+                EditText e = (EditText) v.findViewById(R.id.title_for_timer);
+                timer.setTitle(e.getText().toString());
+                act.addTimerData(timer);
                 d.dismiss();
             }
         });
