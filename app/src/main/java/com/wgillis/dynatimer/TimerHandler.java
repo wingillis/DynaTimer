@@ -36,7 +36,7 @@ public class TimerHandler {
                 @Override
                 public void onFinish() {
                     Log.d("Dyna Timer", "We just finished one of the timers");
-                    long[] pattern = {0,400,200,300,200,200,100};
+                    long[] pattern = {0,300,100,200,100,100,50,100,10};
                     Notification.Builder builder = new Notification.Builder(context)
                             .setContentTitle(timerCard.readable)
                             .setSmallIcon(R.drawable.abc_ratingbar_full_material)
