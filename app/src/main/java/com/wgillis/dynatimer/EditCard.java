@@ -2,51 +2,53 @@ package com.wgillis.dynatimer;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TimePicker;
-import android.widget.Toast;
-
-import java.util.Calendar;
 
 
-
-public class TimePickerFragment extends DialogFragment {
-    private EditText time1;
-    private int minute = 0;
-    private int hour = 0;
-    private int second = 0;
+/**
+ * Created by wgillis on 7/26/2015.
+ */
+public class EditCard extends DialogFragment {
+    private TimerCard card;
+    private int hour;
+    private int minute;
+    private int second;
+    private int position;
     private MainActivity act;
 
-    static TimePickerFragment newInstance() {
-        TimePickerFragment t = new TimePickerFragment();
-        return t;
+    static EditCard newInstance(TimerCard c, int position, MainActivity a) {
+        EditCard editCard = new EditCard();
+        editCard.card = c;
+        editCard.act = a;
+        editCard.position = position;
+        return editCard;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    public void addContext(MainActivity a) {
-        act = a;
-    }
-
     @Override
     public View onCreateView(LayoutInflater lf, ViewGroup parent, Bundle savedState) {
         final Dialog d = getDialog();
-        d.setTitle("Choose Time");
-        final View v = lf.inflate(R.layout.timer_time_picker, parent, false);
+        d.setTitle("Edit Card");
+        final View v = lf.inflate(R.layout.edit_time_picker, parent, false);
+        EditText time1 = (EditText) v.findViewById(R.id.timerText);
+        initializeTime(card);
+        time1.setText(Formatter.format(card));
 
-        time1 = (EditText) v.findViewById(R.id.timerText);
+        final EditText timeTitle = (EditText) v.findViewById(R.id.title_for_timer);
+        timeTitle.setText(card.readable);
         time1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -64,19 +66,28 @@ public class TimePickerFragment extends DialogFragment {
             }
         });
 
-        Button b = (Button) v.findViewById(R.id.button);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button done = (Button) v.findViewById(R.id.button);
+        done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimerCard timer = new TimerCard(hour, minute, second);
-                EditText e = (EditText) v.findViewById(R.id.title_for_timer);
-                timer.setTitle(e.getText().toString());
-                act.addTimerData(timer);
+                TimerCard t = new TimerCard(hour, minute, second);
+                t.setTitle(timeTitle.getText().toString());
+                act.addTimerData(t, position);
+                d.dismiss();
+            }
+        });
+
+        Button delete = (Button) v.findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                act.removeCard(position);
                 d.dismiss();
             }
         });
 
         return v;
+
     }
 
     private void parseTime(String timer) {
@@ -121,7 +132,9 @@ public class TimePickerFragment extends DialogFragment {
         }
     }
 
-
-
-
+    private void initializeTime(TimerCard c) {
+        hour = c.getHour();
+        minute = c.getMinute();
+        second = c.getSecond();
+    }
 }

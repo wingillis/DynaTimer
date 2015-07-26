@@ -23,7 +23,8 @@
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
         android:textSize="18sp"
-        android:layout_margin="0dp" />
+        android:layout_margin="0dp"
+        android:background="#ffffff" />
 
     <Switch
         android:layout_width="match_parent"
@@ -37,6 +38,7 @@
         android:textStyle="bold"
         android:padding="8dp"
         android:checked="false"
-        android:onClick="onRepeatSwitchClicked" />
+        android:onClick="onRepeatSwitchClicked"
+        android:background="#ffffff" />
 
 </RelativeLayout>

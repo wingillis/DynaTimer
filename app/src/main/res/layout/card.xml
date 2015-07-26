@@ -11,19 +11,17 @@
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/card_relative_layout">
-        <TextView android:layout_width="match_parent"
+        <TextView android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/time_view"
-            android:layout_toLeftOf="@+id/timer_start"
             android:text="Sample Text"
             android:textSize="18dp"
-            android:layout_below="@+id/title_view"
-            android:paddingLeft="50dp"
-            android:paddingTop="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp" />
+            android:layout_alignBaseline="@+id/title_view"
+            android:layout_alignBottom="@+id/title_view"
+            android:layout_toStartOf="@+id/timer_start"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:layout_marginRight="5dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -31,9 +29,13 @@
             android:text="Start Timer"
             android:id="@+id/timer_start"
             android:layout_alignParentEnd="true"
-            android:layout_alignBottom="@+id/time_view"
-            android:layout_marginRight="8dp"
-            android:layout_alignTop="@+id/title_view" />
+            android:layout_alignBottom="@+id/editCard"
+            android:layout_alignParentTop="true"
+            android:background="#212aff1d"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -41,16 +43,41 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Timer Title"
             android:id="@+id/title_view"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:layout_alignParentStart="true"
             android:textAlignment="gravity"
-            android:layout_toLeftOf="@+id/timer_start"
-            android:paddingLeft="30dp"
             android:textStyle="bold"
             android:textSize="22dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp" />
+            android:layout_toLeftOf="@+id/time_view"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="timerState"
+            android:id="@+id/timerState"
+            android:background="#212aff1d"
+            android:enabled="true"
+            android:checked="true"
+            android:layout_below="@+id/time_view"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:textSize="20dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:id="@+id/editCard"
+            android:background="#ffffff"
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignTop="@+id/timerState"
+            android:layout_alignEnd="@+id/time_view"
+            android:layout_toEndOf="@+id/timerState"
+            android:layout_marginBottom="5dp" />
 
     </RelativeLayout>
 

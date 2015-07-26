@@ -12,21 +12,19 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/title_for_timer"
         android:hint="Timer hh:mm:ss"
-        android:background="#ffffff"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:background="#ffffff" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD"
+        android:text="Update"
         android:id="@+id/button"
         android:layout_below="@+id/timerText"
-        android:layout_alignRight="@+id/timerText"
-        android:layout_alignEnd="@+id/timerText"
         android:layout_alignLeft="@+id/timerText"
         android:layout_alignStart="@+id/timerText"
-        android:background="#ffffff"
-        android:textSize="20dp" />
+        android:layout_toLeftOf="@+id/delete"
+        android:background="#ffffff" />
 
     <EditText
         android:layout_width="match_parent"
@@ -36,7 +34,17 @@
         android:layout_alignEnd="@+id/timerText"
         android:layout_alignStart="@+id/timerText"
         android:hint="Title"
-        android:background="#ffffff"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:background="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/delete"
+        android:layout_below="@+id/timerText"
+        android:layout_alignRight="@+id/timerText"
+        android:background="#d50024"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
