@@ -25,9 +25,16 @@ public class TimePickerFragment extends DialogFragment {
     private int hour = 0;
     private int second = 0;
     private MainActivity act;
+    private Integer pos = null;
 
     static TimePickerFragment newInstance() {
         TimePickerFragment t = new TimePickerFragment();
+        return t;
+    }
+
+    static TimePickerFragment newInstance(int position) {
+        TimePickerFragment t = new TimePickerFragment();
+        t.pos = position;
         return t;
     }
 
@@ -71,7 +78,11 @@ public class TimePickerFragment extends DialogFragment {
                 TimerCard timer = new TimerCard(hour, minute, second);
                 EditText e = (EditText) v.findViewById(R.id.title_for_timer);
                 timer.setTitle(e.getText().toString());
-                act.addTimerData(timer);
+                if (pos != null) {
+                    act.insertTimerData(timer, pos+1);
+                } else {
+                    act.addTimerData(timer);
+                }
                 d.dismiss();
             }
         });

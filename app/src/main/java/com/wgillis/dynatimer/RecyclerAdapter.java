@@ -72,6 +72,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 }
             });
 
+            Button insert = (Button) c.findViewById(R.id.insertButton);
+            insert.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    TimePickerFragment tpf = TimePickerFragment.newInstance(position);
+                    tpf.addContext(activity);
+                    tpf.show(activity.getFragmentManager(), "");
+                }
+            });
+
             ToggleButton bt = (ToggleButton) c.findViewById(R.id.timerState);
             bt.setChecked(card.isActive());
             if (!card.isActive()) {

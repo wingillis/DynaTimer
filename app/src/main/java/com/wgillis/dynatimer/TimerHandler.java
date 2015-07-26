@@ -73,12 +73,14 @@ public class TimerHandler {
 
                     private void notifyFinish() {
                         long[] pattern = {0, 300, 100, 200, 100, 100, 50, 100, 10};
+                        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
                         Notification.Builder b = new Notification.Builder(context)
                                 .setVibrate(pattern)
                                 .setContentText("Timer Done")
                                 .setContentTitle(timerCard.readable)
                                 .setSmallIcon(R.drawable.abc_ratingbar_full_material)
                                 .setAutoCancel(true)
+                                .setContentIntent(pendingIntent)
                                 .setPriority(Notification.PRIORITY_HIGH);
                         Notification n = b.build();
                         nm.notify(1, n);

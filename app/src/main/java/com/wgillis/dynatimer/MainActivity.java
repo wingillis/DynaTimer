@@ -102,6 +102,11 @@ public class MainActivity extends Activity {
         adapter.notifyDataSetChanged();
     }
 
+    public void insertTimerData(TimerCard c, int position) {
+        timers.add(position, c);
+        adapter.notifyDataSetChanged();
+    }
+
     public void removeCard(int position) {
         timers.remove(position);
         adapter.notifyDataSetChanged();
