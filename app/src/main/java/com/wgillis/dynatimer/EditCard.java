@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -41,7 +42,7 @@ public class EditCard extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater lf, ViewGroup parent, Bundle savedState) {
         final Dialog d = getDialog();
-        d.setTitle("Edit Card");
+        d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         final View v = lf.inflate(R.layout.edit_time_picker, parent, false);
         EditText time1 = (EditText) v.findViewById(R.id.timerText);
         initializeTime(card);

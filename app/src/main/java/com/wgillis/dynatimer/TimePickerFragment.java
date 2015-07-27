@@ -10,6 +10,7 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -50,7 +51,7 @@ public class TimePickerFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater lf, ViewGroup parent, Bundle savedState) {
         final Dialog d = getDialog();
-        d.setTitle("Choose Time");
+        d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         final View v = lf.inflate(R.layout.timer_time_picker, parent, false);
 
         time1 = (EditText) v.findViewById(R.id.timerText);
@@ -70,6 +71,8 @@ public class TimePickerFragment extends DialogFragment {
                 parseTime(editable.toString());
             }
         });
+        EditText ee = (EditText) v.findViewById(R.id.title_for_timer);
+        ee.requestFocus();
 
         Button b = (Button) v.findViewById(R.id.button);
         b.setOnClickListener(new View.OnClickListener() {

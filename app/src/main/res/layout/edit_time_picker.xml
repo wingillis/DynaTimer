@@ -30,12 +30,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/title_for_timer"
-        android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/timerText"
-        android:layout_alignStart="@+id/timerText"
         android:hint="Title"
         android:padding="15dp"
-        android:background="#ffffff" />
+        android:background="#ffffff"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/timerText"
+        android:layout_alignEnd="@+id/timerText" />
 
     <Button
         android:layout_width="wrap_content"
@@ -46,5 +46,18 @@
         android:layout_alignRight="@+id/timerText"
         android:background="#d50024"
         android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/title_for_timer"
+        android:layout_alignEnd="@+id/delete"
+        android:background="#ffffff"
+        android:gravity="center_horizontal"
+        android:padding="10dp" />
 
 </RelativeLayout>

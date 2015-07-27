@@ -1,5 +1,10 @@
 package com.wgillis.dynatimer;
 
+/*
+Launcher icon from http://icons.iconarchive.com/icons/graphicloads/flat-finance/256/timer-icon.png
+ */
+
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
