@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -56,8 +57,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             b.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    th = new TimerHandler(timers, view.getContext());
-                    th.startTimers(p);
+                    if (th == null) {
+                        th = new TimerHandler(timers, view.getContext());
+                        th.startTimers(p);
+                    } else {
+                        Toast t = Toast.makeText(view.getContext(), "A timer is running", Toast.LENGTH_SHORT);
+                        t.show();
+                    }
 
                 }
             });

@@ -5,11 +5,18 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,12 +33,23 @@ public class TimerHandler {
     private NotificationManager nm;
     private final long interval = 1000; //ms
     private long accumulatedTime = 0;
+    private TextToSpeech tts;
+    private Bundle params;
 
     public TimerHandler(ArrayList<TimerCard> c, Context context) {
         timers = c;
         this.context = context.getApplicationContext();
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         cancelled = false;
+        tts = new TextToSpeech(this.context, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+                // nothing?
+            }
+        });
+        params = new Bundle();
+        params.putString(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_ALARM));
+        tts.setLanguage(Locale.US);
     }
 
     public void startTimers(final int position) {
@@ -73,6 +91,7 @@ public class TimerHandler {
 
                     private void notifyFinish() {
                         long[] pattern = {0, 300, 100, 200, 100, 100, 50, 100, 10};
+                        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
                         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), 0);
                         Notification.Builder b = new Notification.Builder(context)
                                 .setVibrate(pattern)
@@ -81,6 +100,7 @@ public class TimerHandler {
                                 .setSmallIcon(R.drawable.abc_ratingbar_full_material)
                                 .setAutoCancel(true)
                                 .setContentIntent(pendingIntent)
+                                .setSound(sound)
                                 .setPriority(Notification.PRIORITY_HIGH);
                         Notification n = b.build();
                         nm.notify(1, n);
@@ -94,12 +114,14 @@ public class TimerHandler {
                     public boolean cancel() {
                         boolean b = super.cancel();
                         nm.cancel(0);
+                        RecyclerAdapter.th = null;
                         return b;
                     }
                 };
-
+                tts.speak(timerCard.readable, TextToSpeech.QUEUE_ADD, params, "win");
                 timer = new Timer();
                 timer.scheduleAtFixedRate(timerTask, 0, interval);
+
             } else {
                 startTimers(position + 1);
             }

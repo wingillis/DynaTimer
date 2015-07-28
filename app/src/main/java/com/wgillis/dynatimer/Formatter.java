@@ -46,11 +46,11 @@ public class Formatter {
             time += String.format("%01d", hour);
             time += ":";
             if (minute == 0) {
-                time += "00";
+                time += "00:";
 
             }
             if (second == 0) {
-                time += ":00";
+                time += "00";
             }
         }
         if (minute != 0) {

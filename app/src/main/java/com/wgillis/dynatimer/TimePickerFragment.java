@@ -120,11 +120,13 @@ public class TimePickerFragment extends DialogFragment {
                 case 2:
                     // timer is hour, minute, seconds
                     int idx1 = timer.indexOf(":");
-                    int idx2 = timer.indexOf(":", idx1);
+                    int idx2 = timer.indexOf(":",idx1+1);
                     hour = Integer.parseInt(timer.substring(0, idx1));
-                    minute = Integer.parseInt(timer.substring(idx1 + 1, idx2));
-                    if (timer.length() > idx2 + 1) {
-                        second = Integer.parseInt(timer.substring(idx2 + 1));
+                    if (idx2 != -1) {
+                        minute = Integer.parseInt(timer.substring(idx1 + 1, idx2));
+                        if (timer.length() > idx2 + 1) {
+                            second = Integer.parseInt(timer.substring(idx2 + 1));
+                        }
                     } else {
                         second = 0;
                     }
