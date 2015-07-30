@@ -1,5 +1,6 @@
 package com.wgillis.dynatimer;
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -35,10 +36,13 @@ public class TimerHandler {
     private long accumulatedTime = 0;
     private TextToSpeech tts;
     private Bundle params;
+    private Activity ac;
+    private RecyclerAdapter adapter;
 
-    public TimerHandler(ArrayList<TimerCard> c, Context context) {
+    public TimerHandler(ArrayList<TimerCard> c, Context context, RecyclerAdapter adap) {
         timers = c;
         this.context = context.getApplicationContext();
+        ac = (Activity) context;
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         cancelled = false;
         tts = new TextToSpeech(this.context, new TextToSpeech.OnInitListener() {
@@ -50,6 +54,7 @@ public class TimerHandler {
         params = new Bundle();
         params.putString(TextToSpeech.Engine.KEY_PARAM_STREAM, String.valueOf(AudioManager.STREAM_ALARM));
         tts.setLanguage(Locale.US);
+        adapter = adap;
     }
 
     public void startTimers(final int position) {
@@ -67,7 +72,13 @@ public class TimerHandler {
                             return;
                         }
                         if (builder != null) {
-                            String time = Formatter.formatLong(timerCard.timerTime - accumulatedTime);
+                            final String time = Formatter.formatLong(timerCard.timerTime - accumulatedTime);
+                            ac.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    adapter.setText(position, time);
+                                }
+                            });
                             builder.setContentText("Time left: " + time)
                                     .setContentTitle(timerCard.readable)
                                     .setPriority(Notification.PRIORITY_DEFAULT);
@@ -113,12 +124,18 @@ public class TimerHandler {
                     @Override
                     public boolean cancel() {
                         boolean b = super.cancel();
+                        ac.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                adapter.setText(position, Formatter.formatLong(timerCard.timerTime));
+                            }
+                        });
                         nm.cancel(0);
                         RecyclerAdapter.th = null;
                         return b;
                     }
                 };
-                tts.speak(timerCard.readable, TextToSpeech.QUEUE_ADD, params, "win");
+                tts.speak(timerCard.readable + " in" + formatSpeech(timerCard), TextToSpeech.QUEUE_ADD, params, "win");
                 timer = new Timer();
                 timer.scheduleAtFixedRate(timerTask, 0, interval);
 
@@ -131,6 +148,26 @@ public class TimerHandler {
             }
         }
 
+    }
+
+    public String formatSpeech(TimerCard c) {
+
+        String speech = " ";
+        if (c.getHour() != 0) {
+            speech += Integer.toString(c.getHour()) + " hours";
+        }
+        if (c.getMinute() != 0) {
+            speech += " " + Integer.toString(c.getMinute()) + " minutes";
+        }
+        if ((c.getMinute() != 0 || c.getHour() != 0) && c.getSecond() != 0) {
+            speech += " and";
+        }
+
+        if (c.getSecond() != 0) {
+            speech += " " + Integer.toString(c.getSecond()) + " seconds";
+        }
+
+        return speech;
     }
 
 }

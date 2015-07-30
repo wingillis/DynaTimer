@@ -45,9 +45,11 @@ public class EditCard extends DialogFragment {
         d.requestWindowFeature(Window.FEATURE_NO_TITLE);
         final View v = lf.inflate(R.layout.edit_time_picker, parent, false);
         EditText time1 = (EditText) v.findViewById(R.id.timerText);
-        initializeTime(card);
-        time1.setText(Formatter.format(card));
 
+        initializeTime(card);
+        String text = Formatter.format(card);
+        time1.setText(text);
+        time1.setSelection(text.length());
         final EditText timeTitle = (EditText) v.findViewById(R.id.title_for_timer);
         timeTitle.setText(card.readable);
         time1.addTextChangedListener(new TextWatcher() {

@@ -17,9 +17,10 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private ArrayList<TimerCard> timers;
+    private ArrayList<TextView> texts;
     private MainActivity activity;
     public static TimerHandler th;
-
+    private RecyclerAdapter a;
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public CardView cardview;
         public ViewHolder(CardView v) {
@@ -31,6 +32,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public RecyclerAdapter(ArrayList<TimerCard> cars, MainActivity a) {
         timers = cars;
         activity = a;
+        this.a = this;
+        texts = new ArrayList<>();
     }
 
     @Override
@@ -49,6 +52,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             final TimerCard card = timers.get(position);
             TextView t = (TextView) c.findViewById(R.id.title_view);
             TextView time = (TextView) c.findViewById(R.id.time_view);
+            texts.add(time);
             Button b = (Button) c.findViewById(R.id.timer_start);
             Button editCard = (Button) c.findViewById(R.id.editCard);
             t.setText(card.readable);
@@ -58,7 +62,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     if (th == null) {
-                        th = new TimerHandler(timers, view.getContext());
+                        th = new TimerHandler(timers, view.getContext(), a);
                         th.startTimers(p);
                     } else {
                         Toast t = Toast.makeText(view.getContext(), "A timer is running", Toast.LENGTH_SHORT);
@@ -116,6 +120,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public int getItemCount() {
         return timers.size();
+    }
+
+    public void setText(int position, String text) {
+        texts.get(position).setText(text);
     }
 
 }

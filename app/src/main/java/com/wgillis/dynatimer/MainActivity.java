@@ -12,6 +12,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +38,7 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Timer;
+import java.util.logging.Handler;
 
 
 public class MainActivity extends Activity {
@@ -47,6 +50,7 @@ public class MainActivity extends Activity {
     public static boolean repeat;
     public static final String prefFile = "dynaTimerPrefs";
     public static final String timerString = "timers";
+    private android.os.Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,13 @@ public class MainActivity extends Activity {
 
         adapter = new RecyclerAdapter(timers, this);
         recyclerView.setAdapter(adapter);
+
+        handler = new android.os.Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message inputMessage) {
+
+            }
+        };
 
 
     }

@@ -1,12 +1,15 @@
 package com.wgillis.dynatimer;
 
 
+import android.widget.TextView;
+
 import java.io.Serializable;
 
 public class TimerCard implements Serializable {
     public long timerTime; //milliseconds
     public int index; //position in the timers
     public String readable;
+    public long timeLeft;
     private int hour;
     private int second;
     private int minute;
@@ -16,6 +19,7 @@ public class TimerCard implements Serializable {
         int hourseconds = hour * 60 * 60;
         int minuteseconds = minute * 60;
         timerTime = (hourseconds+seconds + minuteseconds) * 1000;
+        timeLeft = timerTime;
         readable = Long.toString(timerTime);
         this.hour = hour;
         this.minute = minute;
@@ -45,4 +49,5 @@ public class TimerCard implements Serializable {
     public boolean isActive() {
         return isOn;
     }
+
 }
